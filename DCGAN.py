@@ -148,9 +148,9 @@ if __name__ == '__main__':
     dataloader = DataLoader(mydataset,batch_size=batch_size)
     model = DCGAN_MODEL().to(device)
     for e in range(epoch):
-        for iter,imgs in enumerate(dataloader):
+        for ind,imgs in enumerate(dataloader):
             d_loss,g_loss,real_score,fake_score = model(imgs[0],device)
-            print(f"epoch:{e},iter:{(iter+1)*batch_size},d_loss:{d_loss:.2f},g_loss{g_loss:.2f},real_score:{real_score.item():.2f},fake_score:{fake_score.item():.2f}")
+            print(f"epoch:{e},iter:{(ind+1)*batch_size},d_loss:{d_loss:.2f},g_loss{g_loss:.2f},real_score:{real_score.item():.2f},fake_score:{fake_score.item():.2f}")
     torch.save(model.state_dict(),'model/dcgan.pth')
     model = DCGAN_MODEL()
     model.load_state_dict(torch.load('model/dcgan.pth'))
